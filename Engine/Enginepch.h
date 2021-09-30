@@ -43,14 +43,12 @@ using Matrox	= XMMATRIX;
 
 struct  WindowInfo
 {
-	HWND hwnd;
+	HWND hwnd;//출력 윈도우
 	int32 width;
 	int32 height;
-	bool windowed;
+	bool windowed;//창모드or전체화면
 };
 
 extern unique_ptr<class Engine> GEngine;
 
-
-void HelloEngine();
 

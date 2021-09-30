@@ -26,12 +26,14 @@ void Engine::Render()
 {
 }
 
-void Engine::ResizeWindow(int32 width, int height)
+void Engine::ResizeWindow(int32 width, int32 height)
 {
 	_window.width = width;
 	_window.height = height;
-	RECT rect = {0, 0, width, height};
+	RECT rect = { 0, 0, width, height };
 	::AdjustWindowRect(&rect, WS_OVERLAPPEDWINDOW, false);
-	::SetWindowPos(_window.hwnd, 0, 100, 100, width, height,0);
+	//윈도우 크기를 조절
+	::SetWindowPos(_window.hwnd, 0, 100, 100, width, height, 0);
+	//원하는 위치에 윈도우를 세팅해주는 역활
 
 }
