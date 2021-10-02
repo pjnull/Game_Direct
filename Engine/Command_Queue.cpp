@@ -1,6 +1,7 @@
 #include "pch.h"
 #include "Command_Queue.h"
-
+#include "SwapChain.h"
+#include "Descriptor_Heap.h"
 
 
 Command_Queue::~Command_Queue()
@@ -10,7 +11,7 @@ Command_Queue::~Command_Queue()
 
 
 
-void Command_Queue::Init(ComPtr<ID3D12Device> device, shared_ptr<SwapChain> swapChain, shared_ptr<DescriptorHeap> descHeap)
+void Command_Queue::Init(ComPtr<ID3D12Device> device, shared_ptr<SwapChain> swapChain, shared_ptr<Descriptor_Heap> descHeap)
 {
 	_swapChain = swapChain;
 	_descHeap = descHeap;
@@ -41,21 +42,60 @@ void Command_Queue::Init(ComPtr<ID3D12Device> device, shared_ptr<SwapChain> swap
 }
 void Command_Queue::WaitSync()
 {
-	// Advance the fence value to mark commands up to this fence point.
+	
 	_fenceValue++;
 
-	// Add an instruction to the command queue to set a new fence point.  Because we 
-	// are on the GPU timeline, the new fence point won't be set until the GPU finishes
-	// processing all the commands prior to this Signal().
-	_cmdQueue->Signal(_fence.Get(), _fenceValue);
+	_cmdQueue->Signal(_fence.Get(), _fenceValue);//Queue에 fence값을 넣어줌
 
-	// Wait until the GPU has completed commands up to this fence point.
 	if (_fence->GetCompletedValue() < _fenceValue)
 	{
-		// Fire event when GPU hits current fence.  
-		_fence->SetEventOnCompletion(_fenceValue, _fenceEvent);
-
-		// Wait until the GPU hits current fence event is fired.
-		::WaitForSingleObject(_fenceEvent, INFINITE);
+		_fence->SetEventOnCompletion(_fenceValue, _fenceEvent);//이벤트가 끝낫으면 fence이벤트를 실행 
+		::WaitForSingleObject(_fenceEvent, INFINITE);//기다림
 	}
+}
+
+void Command_Queue::RenderBegin(const D3D12_VIEWPORT* vp, const D3D12_RECT* rect)
+{
+	_cmdAlloc->Reset();
+	_cmdList->Reset(_cmdAlloc.Get(), nullptr);
+
+	D3D12_RESOURCE_BARRIER barrier = CD3DX12_RESOURCE_BARRIER::Transition(
+		_swapChain->GetCurrentBackBufferResource().Get(),
+		D3D12_RESOURCE_STATE_PRESENT, // 화면 출력
+		D3D12_RESOURCE_STATE_RENDER_TARGET); // 외주 결과물
+
+	_cmdList->ResourceBarrier(1, &barrier);
+
+	// Set the viewport and scissor rect.  This needs to be reset whenever the command list is reset.
+	_cmdList->RSSetViewports(1, vp);
+	_cmdList->RSSetScissorRects(1, rect);
+
+	// Specify the buffers we are going to render to.
+	D3D12_CPU_DESCRIPTOR_HANDLE backBufferView = _descHeap->GetBackBufferView();
+	_cmdList->ClearRenderTargetView(backBufferView, Colors::LightSteelBlue, 0, nullptr);
+	_cmdList->OMSetRenderTargets(1, &backBufferView, FALSE, nullptr);
+}
+
+void Command_Queue::RenderEnd()
+{
+	D3D12_RESOURCE_BARRIER barrier = CD3DX12_RESOURCE_BARRIER::Transition(
+		_swapChain->GetCurrentBackBufferResource().Get(),
+		D3D12_RESOURCE_STATE_RENDER_TARGET, // 외주 결과물
+		D3D12_RESOURCE_STATE_PRESENT); // 화면 출력
+
+	_cmdList->ResourceBarrier(1, &barrier);
+	_cmdList->Close();
+
+	// 커맨드 리스트 수행
+	ID3D12CommandList* cmdListArr[] = { _cmdList.Get() };
+	_cmdQueue->ExecuteCommandLists(_countof(cmdListArr), cmdListArr);
+
+	_swapChain->Present();
+
+	// Wait until frame commands are complete.  This waiting is inefficient and is
+	// done for simplicity.  Later we will show how to organize our rendering code
+	// so we do not have to wait per frame.
+	WaitSync();
+
+	_swapChain->SwapIndex();
 }

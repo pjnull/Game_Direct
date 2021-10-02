@@ -13,17 +13,22 @@ void Engine::Init(const WindowInfo& window)
 	ResizeWindow(window.width, window.height);
 	_viewport = { 0,0,static_cast<FLOAT>(window.width),static_cast<FLOAT>(window.height),0.0f,1.0f };
 	_scissorRect = CD3DX12_RECT(0, 0, window.width, window.height);
-	_cmdQueue = make_shared< CommandQueue>();
+	
+	
 	_device = make_shared< Device>();
+	_cmdQueue = make_shared< Command_Queue>();
 	_swapChain = make_shared< SwapChain>();
-	_descHeap = make_shared< DescriptorHeap>();
+	_descHeap = make_shared< Descriptor_Heap>();
 
 	_device->Init();
-
-
+	_cmdQueue->Init(_device->GetDevice(), _swapChain, _descHeap);
+	_swapChain->Init(window, _device->GetDXGI(), _cmdQueue->GetCmdQueue());
+	_descHeap->Init(_device->GetDevice(), _swapChain);
 }
 void Engine::Render()
 {
+	RenderBegin();
+	RenderEnd();
 }
 
 void Engine::ResizeWindow(int32 width, int32 height)
@@ -36,4 +41,14 @@ void Engine::ResizeWindow(int32 width, int32 height)
 	::SetWindowPos(_window.hwnd, 0, 100, 100, width, height, 0);
 	//원하는 위치에 윈도우를 세팅해주는 역활
 
+}
+
+void Engine::RenderBegin()
+{
+	_cmdQueue->RenderBegin(&_viewport,&_scissorRect);
+}
+
+void Engine::RenderEnd()
+{
+	_cmdQueue->RenderEnd();
 }

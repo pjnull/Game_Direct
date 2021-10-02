@@ -4,7 +4,7 @@
 class Game
 {
 public:
-	void Init();
+	void Init(const WindowInfo&windowinfo);
 	void Update();
 };
 

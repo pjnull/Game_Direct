@@ -1,15 +1,21 @@
 #pragma once
 
 class SwapChain;
-class DescriptorHeap;
+class Descriptor_Heap;
 
 
 class Command_Queue
 {
 public:
-	void Init(ComPtr<ID3D12Device> device, shared_ptr<SwapChain> swapChain, shared_ptr<DescriptorHeap> descHeap);
-	void WaitSync();
 	~Command_Queue();
+	  
+	void Init(ComPtr<ID3D12Device> device, shared_ptr<SwapChain> swapChain, shared_ptr<Descriptor_Heap> descHeap);
+	void WaitSync();
+	void RenderBegin(const D3D12_VIEWPORT* vp, const D3D12_RECT* rect);
+	void RenderEnd();
+
+	ComPtr<ID3D12CommandQueue> GetCmdQueue() { return _cmdQueue; }
+	
 private:
 	//ÇÙ½ÉÄÚµå
 	ComPtr<ID3D12CommandQueue> _cmdQueue;
@@ -27,6 +33,6 @@ private:
 	HANDLE							_fenceEvent = INVALID_HANDLE_VALUE;
 
 	shared_ptr<SwapChain>			_swapChain;
-	shared_ptr<DescriptorHeap>		_descHeap;
+	shared_ptr<Descriptor_Heap>		_descHeap;
 };
 
