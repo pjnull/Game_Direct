@@ -52,6 +52,9 @@ enum
 {
 	SWAP_CHAIN_BUFFER_COUNT = 2
 };
+#define DEVICE GEngine->GetDevice()->GetDevice()
+#define CmdList GEngine->GetcmdQ()->GetCmdlist()
+
 extern unique_ptr<class Engine> GEngine;
 
 

@@ -82,13 +82,13 @@
     <LinkIncremental>true</LinkIncremental>
     <IncludePath>$(SolutionDir)Engine\;$(IncludePath)</IncludePath>
     <LibraryPath>$(SolutionDir)OutPut\;$(LibraryPath)</LibraryPath>
-    <OutDir>$(SolutionDir)OuPut</OutDir>
+    <OutDir>$(SolutionDir)OuPut\</OutDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
     <IncludePath>$(SolutionDir)Engine\;$(IncludePath)</IncludePath>
     <LibraryPath>$(SolutionDir)OutPut\;$(LibraryPath)</LibraryPath>
-    <OutDir>$(SolutionDir)OuPut</OutDir>
+    <OutDir>$(SolutionDir)OuPut\</OutDir>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>

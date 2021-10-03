@@ -1,4 +1,10 @@
 #pragma once
+
+#include "Device.h"
+#include "Command_Queue.h"
+#include "SwapChain.h"
+
+
 class Engine
 {
 public:
@@ -11,16 +17,19 @@ public:
 	void RenderBegin();
 	void RenderEnd();
 
+public:
+	shared_ptr<Device> GetDevice() { return _device; }
+	shared_ptr<Command_Queue> GetcmdQ() { return _cmdQueue; }
+	shared_ptr<SwapChain> GetSwapC() { return _swapChain; }
+
 private:
 	//그려질 화면 크기 관련
 	WindowInfo _window;
 	D3D12_VIEWPORT _viewport = {};
 	D3D12_RECT _scissorRect = {};
 
-	shared_ptr<class Device> _device;
-	shared_ptr<class Command_Queue> _cmdQueue;
-	shared_ptr<class SwapChain> _swapChain;
-	shared_ptr<class Descriptor_Heap> _descHeap;
-
+	shared_ptr<Device> _device;
+	shared_ptr<Command_Queue> _cmdQueue;
+	shared_ptr<SwapChain> _swapChain;
 };
 

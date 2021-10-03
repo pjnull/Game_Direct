@@ -157,7 +157,6 @@
   <ItemGroup>
     <ClInclude Include="Command_Queue.h" />
     <ClInclude Include="d3dx12.h" />
-    <ClInclude Include="Descriptor_Heap.h" />
     <ClInclude Include="Device.h" />
     <ClInclude Include="Engine.h" />
     <ClInclude Include="Enginepch.h" />
@@ -166,7 +165,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Command_Queue.cpp" />
-    <ClCompile Include="Descriptor_Heap.cpp" />
     <ClCompile Include="Device.cpp" />
     <ClCompile Include="Engine.cpp" />
     <ClCompile Include="Enginepch.cpp" />

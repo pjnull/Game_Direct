@@ -9,13 +9,13 @@ class Command_Queue
 public:
 	~Command_Queue();
 	  
-	void Init(ComPtr<ID3D12Device> device, shared_ptr<SwapChain> swapChain, shared_ptr<Descriptor_Heap> descHeap);
+	void Init(ComPtr<ID3D12Device> device, shared_ptr<SwapChain> swapChain);
 	void WaitSync();
 	void RenderBegin(const D3D12_VIEWPORT* vp, const D3D12_RECT* rect);
 	void RenderEnd();
 
 	ComPtr<ID3D12CommandQueue> GetCmdQueue() { return _cmdQueue; }
-	
+	ComPtr<ID3D12GraphicsCommandList> GetCmdlist() { return _cmdList; }
 private:
 	//ÇÙ½ÉÄÚµå
 	ComPtr<ID3D12CommandQueue> _cmdQueue;
@@ -33,6 +33,5 @@ private:
 	HANDLE							_fenceEvent = INVALID_HANDLE_VALUE;
 
 	shared_ptr<SwapChain>			_swapChain;
-	shared_ptr<Descriptor_Heap>		_descHeap;
 };
 
