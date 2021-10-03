@@ -52,8 +52,16 @@ enum
 {
 	SWAP_CHAIN_BUFFER_COUNT = 2
 };
+struct Vertex
+{
+	Vec3 pos;//X,Y,ZÁÂÇ¥
+	Vec4 color;//RGBA
+
+};
 #define DEVICE GEngine->GetDevice()->GetDevice()
 #define CmdList GEngine->GetcmdQ()->GetCmdlist()
+#define ROOT_SIGNATURE GEngine->GetRootSig()->GetSignature()
+
 
 extern unique_ptr<class Engine> GEngine;
 

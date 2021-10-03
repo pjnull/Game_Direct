@@ -3,8 +3,9 @@
 #include "Device.h"
 #include "Command_Queue.h"
 #include "SwapChain.h"
-
-
+#include "RootSig.h"
+#include "Shader.h"
+#include "Mesh.h"
 class Engine
 {
 public:
@@ -21,6 +22,7 @@ public:
 	shared_ptr<Device> GetDevice() { return _device; }
 	shared_ptr<Command_Queue> GetcmdQ() { return _cmdQueue; }
 	shared_ptr<SwapChain> GetSwapC() { return _swapChain; }
+	shared_ptr<RootSig> GetRootSig() { return _rootsig; }
 
 private:
 	//그려질 화면 크기 관련
@@ -31,5 +33,7 @@ private:
 	shared_ptr<Device> _device;
 	shared_ptr<Command_Queue> _cmdQueue;
 	shared_ptr<SwapChain> _swapChain;
+	shared_ptr<RootSig> _rootsig;
+
 };
 
