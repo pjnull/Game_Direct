@@ -6,6 +6,7 @@
 #include "RootSig.h"
 #include "Shader.h"
 #include "Mesh.h"
+#include "ConstantBuffer.h"
 class Engine
 {
 public:
@@ -23,6 +24,7 @@ public:
 	shared_ptr<Command_Queue> GetcmdQ() { return _cmdQueue; }
 	shared_ptr<SwapChain> GetSwapC() { return _swapChain; }
 	shared_ptr<RootSig> GetRootSig() { return _rootsig; }
+	shared_ptr<ConstantBuffer> GetConstantBuffer() { return _cb; }
 
 private:
 	//그려질 화면 크기 관련
@@ -34,6 +36,8 @@ private:
 	shared_ptr<Command_Queue> _cmdQueue;
 	shared_ptr<SwapChain> _swapChain;
 	shared_ptr<RootSig> _rootsig;
+	shared_ptr<ConstantBuffer> _cb;
+	
 
 };
 

@@ -15,11 +15,13 @@ void Engine::Init(const WindowInfo& window)
 	_cmdQueue = make_shared< Command_Queue>();
 	_swapChain = make_shared< SwapChain>();
 	_rootsig = make_shared<RootSig>();
-	
+	_cb = make_shared<ConstantBuffer>();
+
 	_device->Init();
 	_cmdQueue->Init(_device->GetDevice(), _swapChain);
 	_swapChain->Init(window,_device->GetDevice(), _device->GetDXGI(), _cmdQueue->GetCmdQueue());
 	_rootsig->Init(_device->GetDevice());
+	_cb->Init(sizeof(Transform),256);
 }
 void Engine::Render()
 {

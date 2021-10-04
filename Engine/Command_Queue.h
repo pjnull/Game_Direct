@@ -29,7 +29,7 @@ private:
 	//Fence->Cpu/Gpu동기화를 위한 도구
 	//중간 결과를 기다려야만 하는 상황을 위한것
 	ComPtr<ID3D12Fence>				_fence;
-	UINT32							_fenceValue = 0;
+	uint32							_fenceValue = 0;
 	HANDLE							_fenceEvent = INVALID_HANDLE_VALUE;
 
 	shared_ptr<SwapChain>			_swapChain;

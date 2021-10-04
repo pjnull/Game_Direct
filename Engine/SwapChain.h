@@ -21,6 +21,6 @@ private:
 	ComPtr<ID3D12DescriptorHeap>	_rtvHeap;
 	
 	D3D12_CPU_DESCRIPTOR_HANDLE		_rtvHandle[SWAP_CHAIN_BUFFER_COUNT];
-	UINT32							_backBufferIndex = 0;
+	uint32							_backBufferIndex = 0;
 };
 

@@ -32,10 +32,10 @@ using int8		= __int8;
 using int16		= __int16;
 using int32		= __int32;
 using int64		= __int64;
-using unit8		= unsigned __int8;
-using unit16	= unsigned __int16;
-using unit32	= unsigned __int32;
-using unit64	= unsigned __int64;
+using uint8		= unsigned __int8;
+using uint16	= unsigned __int16;
+using uint32	= unsigned __int32;
+using uint64	= unsigned __int64;
 using Vec2		= XMFLOAT2;
 using Vec3		= XMFLOAT3;
 using Vec4		= XMFLOAT4;
@@ -52,12 +52,17 @@ enum
 {
 	SWAP_CHAIN_BUFFER_COUNT = 2
 };
+struct Transform
+{
+	Vec4 offset;
+};
 struct Vertex
 {
 	Vec3 pos;//X,Y,ZÁÂÇ¥
 	Vec4 color;//RGBA
 
 };
+
 #define DEVICE GEngine->GetDevice()->GetDevice()
 #define CmdList GEngine->GetcmdQ()->GetCmdlist()
 #define ROOT_SIGNATURE GEngine->GetRootSig()->GetSignature()
