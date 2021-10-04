@@ -22,6 +22,16 @@ void TableDescriptorHeap::Clear()
 	_currentGroupIndex = 0;
 }
 
+void TableDescriptorHeap::SetCBV(D3D12_CPU_DESCRIPTOR_HANDLE srcHandle, CBV_REGISTER reg)
+{
+	D3D12_CPU_DESCRIPTOR_HANDLE destHandle = GetCPUHandle(reg);
+
+	uint32 destRange = 1;
+	uint32 srcRange = 1;
+	DEVICE->CopyDescriptors(1, &destHandle, &destRange, 1, &srcHandle, &srcRange, D3D12_DESCRIPTOR_HEAP_TYPE_CBV_SRV_UAV);
+}
+
+
 void TableDescriptorHeap::CommitTable()
 {
 	D3D12_GPU_DESCRIPTOR_HANDLE handle = _descHeap->GetGPUDescriptorHandleForHeapStart();
