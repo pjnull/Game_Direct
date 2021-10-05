@@ -71,12 +71,12 @@ void Game::Update()
 		mesh->SetTransform(t);
 		mesh->Render();
 	}
-	{
+	/*{
 		Transform t;
 		t.offset = Vec4(0.f, 0.75f, 0, 0);
 		mesh->SetTransform(t);
 		mesh->Render();
-	}
+	}*/
 
 	GEngine->RenderEnd();
 
