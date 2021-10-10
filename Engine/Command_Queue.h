@@ -13,14 +13,20 @@ public:
 	void WaitSync();
 	void RenderBegin(const D3D12_VIEWPORT* vp, const D3D12_RECT* rect);
 	void RenderEnd();
+	void FlushResourceCommandQueue();
 
 	ComPtr<ID3D12CommandQueue> GetCmdQueue() { return _cmdQueue; }
 	ComPtr<ID3D12GraphicsCommandList> GetCmdlist() { return _cmdList; }
+	ComPtr<ID3D12GraphicsCommandList> GetResCmdlist() { return _resCmdList; }
 private:
 	//핵심코드
 	ComPtr<ID3D12CommandQueue> _cmdQueue;
 	ComPtr<ID3D12CommandAllocator> _cmdAlloc;
 	ComPtr<ID3D12GraphicsCommandList> _cmdList;
+	
+	ComPtr<ID3D12CommandAllocator> _resCmdAlloc;
+	ComPtr<ID3D12GraphicsCommandList> _resCmdList;
+
 	//Queue=일감을 넣어줌 
 	//Alloc=할당해주기 위한 메모리 공간
 	//List=일감 리스트

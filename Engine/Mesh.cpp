@@ -17,6 +17,7 @@ void Mesh::Render()
 	{
 		D3D12_CPU_DESCRIPTOR_HANDLE handle = GEngine->GetConstantBuffer()->PushData(0, &_transform, sizeof(_transform));
 		GEngine->GetTableDecHeap()->SetCBV(handle, CBV_REGISTER::b0);
+		GEngine->GetTableDecHeap()->SetSRV(_tex->GetCpuHandle(), SRV_REGISTER::t0);
 	}
 	/*{
 		D3D12_CPU_DESCRIPTOR_HANDLE handle = GEngine->GetConstantBuffer()->PushData(0, &_transform, sizeof(_transform));
