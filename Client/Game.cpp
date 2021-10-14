@@ -45,7 +45,7 @@ vec[5].color = Vec4(1.f, 0.f, 0.f, 1.f);
 	vec[2].uv = Vec2(1.f, 1.f);
 	vec[3].pos = Vec3(-0.5f, -0.5f, 0.5f);
 	vec[3].color = Vec4(0.f, 1.f, 0.f, 1.f);
-	vec[0].uv = Vec2(0.f, 1.f);
+	vec[3].uv = Vec2(0.f, 1.f);
 
 	vector<uint32> indexVec;
 	{
@@ -73,17 +73,17 @@ void Game::Update()
 	shader->Update();
 	{
 		Transform t;
-		t.offset = Vec4(0.75f, 0, 0, 0);
+		t.offset = Vec4(0.75f, 0.f, 0.3f, 0.f);
 		mesh->SetTransform(t);
 		mesh->SetTexture(texture);
 		mesh->Render();
 	}
-	/*{
+	{
 		Transform t;
-		t.offset = Vec4(0.f, 0.75f, 0, 0);
+		t.offset = Vec4(0.25f, 0.25f, 0.2f, 0.f);
 		mesh->SetTransform(t);
 		mesh->Render();
-	}*/
+	}
 
 	GEngine->RenderEnd();
 

@@ -9,6 +9,7 @@
 #include "ConstantBuffer.h"
 #include "TableDescriptorHeap.h"
 #include "Texture.h"
+#include "Depth_Stencil_Buffer.h"
 class Engine
 {
 public:
@@ -28,7 +29,7 @@ public:
 	shared_ptr<RootSig> GetRootSig() { return _rootsig; }
 	shared_ptr<ConstantBuffer> GetConstantBuffer() { return _cb; }
 	shared_ptr<TableDescriptorHeap> GetTableDecHeap() { return _tableDescHeap; }
-
+	shared_ptr<Depth_Stencil_Buffer>GetDepthStencilBuffer() { return _depthStencilBuffer; }
 private:
 	//그려질 화면 크기 관련
 	WindowInfo _window;
@@ -41,7 +42,7 @@ private:
 	shared_ptr<RootSig> _rootsig;
 	shared_ptr<ConstantBuffer> _cb;
 	shared_ptr<TableDescriptorHeap> _tableDescHeap;
-	
+	shared_ptr<Depth_Stencil_Buffer>_depthStencilBuffer;
 
 };
 

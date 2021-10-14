@@ -51,6 +51,9 @@
     <ClCompile Include="Texture.cpp">
       <Filter>Engine</Filter>
     </ClCompile>
+    <ClCompile Include="Depth_Stencil_Buffer.cpp">
+      <Filter>Engine</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h">
@@ -90,6 +93,9 @@
       <Filter>Engine</Filter>
     </ClInclude>
     <ClInclude Include="Texture.h">
+      <Filter>Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="Depth_Stencil_Buffer.h">
       <Filter>Engine</Filter>
     </ClInclude>
   </ItemGroup>

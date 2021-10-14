@@ -162,6 +162,7 @@
     <ClInclude Include="Command_Queue.h" />
     <ClInclude Include="ConstantBuffer.h" />
     <ClInclude Include="d3dx12.h" />
+    <ClInclude Include="Depth_Stencil_Buffer.h" />
     <ClInclude Include="Device.h" />
     <ClInclude Include="Engine.h" />
     <ClInclude Include="Enginepch.h" />
@@ -176,6 +177,7 @@
   <ItemGroup>
     <ClCompile Include="Command_Queue.cpp" />
     <ClCompile Include="ConstantBuffer.cpp" />
+    <ClCompile Include="Depth_Stencil_Buffer.cpp" />
     <ClCompile Include="Device.cpp" />
     <ClCompile Include="Engine.cpp" />
     <ClCompile Include="Enginepch.cpp" />
