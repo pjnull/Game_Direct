@@ -106,7 +106,8 @@ struct Vertex
 #define CmdList GEngine->GetcmdQ()->GetCmdlist()
 #define RESOUCE_Cmd_List GEngine->GetcmdQ()->GetResCmdlist()
 #define ROOT_SIGNATURE GEngine->GetRootSig()->GetSignature()
-
+#define INPUT GEngine->GetInput()
+#define DELTA_TIME	GEngine->GetTimer()->GetDeltaTime()
 
 extern unique_ptr<class Engine> GEngine;
 
