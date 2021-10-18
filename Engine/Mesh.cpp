@@ -1,6 +1,7 @@
 #include "pch.h"
 #include "Mesh.h"
 #include "Engine.h"
+#include "Material.h"
 
 void Mesh::Init(const vector<Vertex>& vertexBuffer, const vector<uint32>& indexBuffer)
 {
@@ -14,15 +15,17 @@ void Mesh::Render()
 	CmdList->IASetVertexBuffers(0, 1, &_vertexBufferView); // Slot: (0~15)
 	CmdList->IASetIndexBuffer(&_indexBufferView);
 
-	{
-		D3D12_CPU_DESCRIPTOR_HANDLE handle = GEngine->GetConstantBuffer()->PushData(0, &_transform, sizeof(_transform));
-		GEngine->GetTableDecHeap()->SetCBV(handle, CBV_REGISTER::b0);
-		GEngine->GetTableDecHeap()->SetSRV(_tex->GetCpuHandle(), SRV_REGISTER::t0);
-	}
+	
+	
+	CONST_BUFFER(CONSTANT_BUFFER_TYPE::TRANSFORM)->PushData(&_transform, sizeof(_transform));
+		//GEngine->GetTableDecHeap()->SetCBV(handle, CBV_REGISTER::b0);
+	
 	/*{
 		D3D12_CPU_DESCRIPTOR_HANDLE handle = GEngine->GetConstantBuffer()->PushData(0, &_transform, sizeof(_transform));
 		GEngine->GetTableDecHeap()->SetCBV(handle, CBV_REGISTER::b1);
 	}*/
+
+	_mat->Update();
 	GEngine->GetTableDecHeap()->CommitTable();
 	//GEngine->GetConstantBuffer()->PushData(1, &_transform, sizeof(_transform));
 	//CmdList->SetGraphicsRootConstantBufferView();
