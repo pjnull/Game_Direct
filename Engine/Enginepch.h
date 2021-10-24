@@ -90,10 +90,7 @@ enum
 	SRV_REGISTER_COUNT = static_cast<uint8>(SRV_REGISTER::END)-(CBV_REGISTER_COUNT),
 	REGISTER_COUNT = CBV_REGISTER_COUNT+ SRV_REGISTER_COUNT,
 };
-struct Transform
-{
-	Vec4 offset;
-};
+
 struct Vertex
 {
 	Vec3 pos;//X,Y,ZÁÂÇ¥

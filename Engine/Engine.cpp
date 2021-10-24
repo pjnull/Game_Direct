@@ -1,7 +1,7 @@
 #include "pch.h"
 #include "Engine.h"
 #include "Material.h"
-
+#include "Transform.h"
 
 void Engine::Init(const WindowInfo& window)
 {
@@ -19,7 +19,7 @@ void Engine::Init(const WindowInfo& window)
 	_input->Init(window.hwnd);
 	_timer->Init();
 
-	CreateConstantBuffer(CBV_REGISTER::b0, sizeof(Transform), 256);
+	CreateConstantBuffer(CBV_REGISTER::b0, sizeof(TransformMatrix), 256);
 	CreateConstantBuffer(CBV_REGISTER::b1, sizeof(MaterialParams), 256);
 
 	ResizeWindow(window.width, window.height);
@@ -58,6 +58,11 @@ void Engine::Update()
 	_input->Update();
 	_timer->Update();
 	ShowFps();
+}
+
+void Engine::LateUpdate()
+{
+
 }
 
 void Engine::ShowFps()

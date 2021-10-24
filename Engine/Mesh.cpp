@@ -17,7 +17,6 @@ void Mesh::Render()
 
 	
 	
-	CONST_BUFFER(CONSTANT_BUFFER_TYPE::TRANSFORM)->PushData(&_transform, sizeof(_transform));
 		//GEngine->GetTableDecHeap()->SetCBV(handle, CBV_REGISTER::b0);
 	
 	/*{
@@ -25,7 +24,6 @@ void Mesh::Render()
 		GEngine->GetTableDecHeap()->SetCBV(handle, CBV_REGISTER::b1);
 	}*/
 
-	_mat->Update();
 	GEngine->GetTableDecHeap()->CommitTable();
 	//GEngine->GetConstantBuffer()->PushData(1, &_transform, sizeof(_transform));
 	//CmdList->SetGraphicsRootConstantBufferView();

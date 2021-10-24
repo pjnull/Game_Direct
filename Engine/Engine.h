@@ -25,6 +25,7 @@ public:
 	void RenderEnd();
 
 	void Update();
+	void LateUpdate();
 
 public:
 	shared_ptr<Device> GetDevice() { return _device; }
