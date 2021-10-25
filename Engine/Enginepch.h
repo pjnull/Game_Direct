@@ -99,12 +99,25 @@ struct Vertex
 
 };
 
+#define DECLARE_SINGLE(type)			\
+private:								\
+	type() {}							\
+	~type() {}							\
+public:									\
+	static type* GetInstance()			\
+	{									\
+		static type instance;			\
+		return &instance;				\
+	}									\
+
+#define GET_SINGLE(type) type::GetInstance()
+
 #define DEVICE GEngine->GetDevice()->GetDevice()
 #define CmdList GEngine->GetcmdQ()->GetCmdlist()
 #define RESOUCE_Cmd_List GEngine->GetcmdQ()->GetResCmdlist()
 #define ROOT_SIGNATURE GEngine->GetRootSig()->GetSignature()
-#define INPUT GEngine->GetInput()
-#define DELTA_TIME	GEngine->GetTimer()->GetDeltaTime()
+#define INPUT GET_SINGLE(Input)
+#define DELTA_TIME	GET_SINGLE(Timer)->GetDeltaTime()
 #define CONST_BUFFER(type) GEngine->GetConstantBuffer(type)
 
 extern unique_ptr<class Engine> GEngine;

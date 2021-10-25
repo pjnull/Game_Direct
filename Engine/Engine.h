@@ -10,8 +10,8 @@
 #include "TableDescriptorHeap.h"
 #include "Texture.h"
 #include "Depth_Stencil_Buffer.h"
-#include "Input.h"
-#include "Timer.h"
+
+
 class Engine
 {
 public:
@@ -35,8 +35,8 @@ public:
 	shared_ptr<TableDescriptorHeap> GetTableDecHeap() { return _tableDescHeap; }
 	shared_ptr<Depth_Stencil_Buffer>GetDepthStencilBuffer() { return _depthStencilBuffer; }
 	
-	shared_ptr<Input>GetInput() { return _input; }
-	shared_ptr<Timer>GetTimer() { return _timer; }
+	/*shared_ptr<Input>GetInput() { return _input; }
+	shared_ptr<Timer>GetTimer() { return _timer; }*/
 	
 	shared_ptr<ConstantBuffer>GetConstantBuffer(CONSTANT_BUFFER_TYPE type) { return _constantBuffers[static_cast<uint8>(type)]; }
 
@@ -56,8 +56,8 @@ private:
 	shared_ptr<TableDescriptorHeap> _tableDescHeap = make_shared<TableDescriptorHeap>();
 	shared_ptr<Depth_Stencil_Buffer>_depthStencilBuffer = make_shared<Depth_Stencil_Buffer>();
 	
-	shared_ptr<Input>_input = make_shared<Input>();
-	shared_ptr<Timer>_timer = make_shared<Timer>();
+	//shared_ptr<Input>_input = make_shared<Input>();
+	//shared_ptr<Timer>_timer = make_shared<Timer>();
 
 	vector<shared_ptr<ConstantBuffer>>		_constantBuffers;
 };
