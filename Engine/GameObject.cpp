@@ -72,6 +72,15 @@ void GameObject::LateUpdate()
 		script->LateUpdate();
 	}
 }
+void GameObject::FinalUpdate()
+{
+	for (shared_ptr<Component>& component : _components)
+	{
+		if (component)
+			component->FinalUpdate();
+	}
+
+}
 
 shared_ptr<Transform> GameObject::GetTransform()
 {

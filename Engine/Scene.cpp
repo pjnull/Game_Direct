@@ -34,6 +34,14 @@ void Scene::LateUpdate()
 	}
 }
 
+void Scene::FinalUpdate()
+{
+	for (const shared_ptr<GameObject>& gameObject : _gameobject)
+	{
+		gameObject->FinalUpdate();
+	}
+}
+
 void Scene::AddGameObject(shared_ptr<GameObject> gameobject)
 {
 	_gameobject.push_back(gameobject);

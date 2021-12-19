@@ -13,6 +13,7 @@ void SceneManager::Update()
 	
 	_activeScene->Update();
 	_activeScene->LateUpdate();
+	_activeScene->FinalUpdate();
 
 }
 

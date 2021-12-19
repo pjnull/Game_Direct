@@ -27,7 +27,8 @@ public:
 	virtual void	Awake() {}//제일 처음 호출
 	virtual void	Start() {}//2
 	virtual void	Update() {}//3
-	virtual void	LateUpdate() {}//제일 마지막에 호출
+	virtual void	LateUpdate() {}//4
+	virtual void	FinalUpdate() {}//제일 마지막에 호출
 
 public:
 	COMPONENT_TYPE GetType() { return _type; }

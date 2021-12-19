@@ -22,6 +22,7 @@ namespace fs = std::filesystem;
 #include<DirectXMath.h>
 #include<DirectXPackedVector.h>
 #include<DirectXColors.h>
+#include"SimpleMath.h"
 using namespace DirectX;
 using namespace DirectX::PackedVector;
 using namespace Microsoft::WRL;
@@ -48,10 +49,10 @@ using uint8		= unsigned __int8;
 using uint16	= unsigned __int16;
 using uint32	= unsigned __int32;
 using uint64	= unsigned __int64;
-using Vec2		= XMFLOAT2;
-using Vec3		= XMFLOAT3;
-using Vec4		= XMFLOAT4;
-using Matrox	= XMMATRIX;
+using Vec2		= DirectX::SimpleMath::Vector2;
+using Vec3		= DirectX::SimpleMath::Vector3;
+using Vec4		= DirectX::SimpleMath::Vector4;
+using Matrix	= DirectX::SimpleMath::Matrix;
 
 
 enum class CBV_REGISTER : uint8
