@@ -13,6 +13,7 @@ public:
 
 	void AddGameObject(shared_ptr<GameObject>gameobject);
 	void RemoveGameObject(shared_ptr<GameObject>gameobject);
+	const vector<shared_ptr<GameObject>>& GetGameObjects() {return _gameobject;}
 
 private:
 	vector<shared_ptr<GameObject>>_gameobject;

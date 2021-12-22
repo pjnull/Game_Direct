@@ -28,6 +28,7 @@ public:
 	void LateUpdate();
 
 public:
+	const WindowInfo& GetWindow() { return _window; }
 	shared_ptr<Device> GetDevice() { return _device; }
 	shared_ptr<Command_Queue> GetcmdQ() { return _cmdQueue; }
 	shared_ptr<SwapChain> GetSwapC() { return _swapChain; }

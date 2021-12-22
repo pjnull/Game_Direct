@@ -20,18 +20,19 @@ void Engine::Init(const WindowInfo& window)
 	_depthStencilBuffer->Init(_window);
 
 
-	CreateConstantBuffer(CBV_REGISTER::b0, sizeof(TransformMatrix), 256);
+	CreateConstantBuffer(CBV_REGISTER::b0, sizeof(TransformParams), 256);
 	CreateConstantBuffer(CBV_REGISTER::b1, sizeof(MaterialParams), 256);
 
 	ResizeWindow(window.width, window.height);
 
 	GET_SINGLE(Input)->Init(window.hwnd);
 	GET_SINGLE(Timer)->Init();
+	GET_SINGLE(SceneManager)->Update();
 }
 void Engine::Render()
 {
 	RenderBegin();
-	GET_SINGLE(SceneManager)->Update();
+	GET_SINGLE(SceneManager)->Render();
 	RenderEnd();
 }
 

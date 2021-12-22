@@ -99,6 +99,10 @@ struct Vertex
 	Vec2 uv;
 
 };
+struct TransformParams
+{
+	Matrix matWVP;
+};
 
 #define DECLARE_SINGLE(type)			\
 private:								\

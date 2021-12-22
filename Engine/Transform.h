@@ -2,10 +2,10 @@
 #include "Component.h"
 #include "Enginepch.h"
 
-struct TransformMatrix
+/*struct TransformMatrix
 {
 	Vec4 offset;
-};
+};*/
 
 class Transform	: public Component
 {
@@ -42,6 +42,7 @@ private:
 	Vec3 _localPosition = {};
 	Vec3 _localRotation = {};
 	Vec3 _localScale = {1.f,1.f,1.f};
+
 	Matrix _matrixLocal = {};
 	Matrix _matrixWorld = {};
 

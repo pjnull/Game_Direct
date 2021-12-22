@@ -5,6 +5,9 @@
 #include "Material.h"
 #include "MeshRenderer.h"
 #include "GameObject.h"
+#include "Transform.h"
+#include "Camera.h"
+#include "TestCamera.h"
 
 
 void SceneManager::Update()
@@ -23,7 +26,18 @@ void SceneManager::LoadScene(wstring sceneName)
 	_activeScene->Awake();
 	_activeScene->Start();
 }
+void SceneManager::Render()
+{
+	if (_activeScene == nullptr)return;
 
+	const vector<shared_ptr<GameObject>>& gameobjects = _activeScene->GetGameObjects();
+	for (auto& gameobject : gameobjects)
+	{
+		if (gameobject->GetCamera() == nullptr)continue;
+		gameobject->GetCamera()->Render();
+	}
+}
+#pragma region TestOb
 shared_ptr<Scene> SceneManager::LoadTestScene()
 {
 	shared_ptr<Scene>scene = make_shared<Scene>();
@@ -56,6 +70,9 @@ shared_ptr<Scene> SceneManager::LoadTestScene()
 	}
 
 	gameobject->Init();
+	shared_ptr<Transform>transform = gameobject->GetTransform();
+	transform->SetLocalPosition(Vec3(0.f, 100.f, 200.f));
+	transform->SetLocalScale(Vec3(100.f, 100.f, 1.f));
 
 	shared_ptr<MeshRenderer>meshRenderer = make_shared<MeshRenderer>();
 	{
@@ -84,7 +101,18 @@ shared_ptr<Scene> SceneManager::LoadTestScene()
 
 	scene->AddGameObject(gameobject);
 
+#pragma endregion
+
+#pragma region Camera
+	shared_ptr<GameObject>camera = make_shared<GameObject>();
+	camera->AddComponent(make_shared<Transform>());
+	camera->AddComponent(make_shared<Camera>());
+	camera->AddComponent(make_shared<TestCamera>());
+	camera->GetTransform()->SetLocalPosition(Vec3(0.f,100.f,0.f));
+	scene->AddGameObject(camera);
+#pragma endregion
 
 	return scene;
+
 }
 
