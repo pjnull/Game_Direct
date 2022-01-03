@@ -2,38 +2,38 @@
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <Filter Include="Engine">
-      <UniqueIdentifier>{9bb52745-0b66-4a4f-9bb5-d3d297ef683a}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Utils">
-      <UniqueIdentifier>{8ee42c87-19a2-44f7-838f-f28a02d6917b}</UniqueIdentifier>
+      <UniqueIdentifier>{53dd1d9c-afa2-43de-8545-b68fe1eb95c5}</UniqueIdentifier>
     </Filter>
     <Filter Include="Resource">
-      <UniqueIdentifier>{faa9d194-3e12-451d-94a2-901c2f410778}</UniqueIdentifier>
+      <UniqueIdentifier>{c5612518-9c4d-408d-926a-9312743d39fa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Utils">
+      <UniqueIdentifier>{300f6233-f1b4-4f18-9360-c9bfe0308e34}</UniqueIdentifier>
     </Filter>
     <Filter Include="Shader">
-      <UniqueIdentifier>{215ec44c-ffd4-4407-aa0c-48f019fd58e9}</UniqueIdentifier>
+      <UniqueIdentifier>{710a24eb-3b22-4cba-b53b-42897f27a6d4}</UniqueIdentifier>
     </Filter>
     <Filter Include="GameObject">
-      <UniqueIdentifier>{802fc67a-6188-48cd-afae-927e1954d2b0}</UniqueIdentifier>
+      <UniqueIdentifier>{dd23f47d-3ac2-4f96-9bfe-4a6fac248639}</UniqueIdentifier>
     </Filter>
     <Filter Include="Manager">
-      <UniqueIdentifier>{c05a939a-9e1d-468f-b90e-bd88eaf3e685}</UniqueIdentifier>
+      <UniqueIdentifier>{25b3214d-e145-4b49-8e9d-908a06998ffa}</UniqueIdentifier>
     </Filter>
-    <Filter Include="GameObject\TestCamera">
-      <UniqueIdentifier>{2c458ed7-1383-4119-8c18-9752ab68baae}</UniqueIdentifier>
+    <Filter Include="GameObject\Test">
+      <UniqueIdentifier>{1cfe4b64-4ca1-4958-b16f-73f8ae1985c3}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp">
       <Filter>Utils</Filter>
     </ClCompile>
-    <ClCompile Include="Enginepch.cpp">
+    <ClCompile Include="EnginePch.cpp">
       <Filter>Utils</Filter>
     </ClCompile>
     <ClCompile Include="Engine.cpp">
       <Filter>Engine</Filter>
     </ClCompile>
-    <ClCompile Include="Command_Queue.cpp">
+    <ClCompile Include="CommandQueue.cpp">
       <Filter>Engine</Filter>
     </ClCompile>
     <ClCompile Include="Device.cpp">
@@ -42,7 +42,7 @@
     <ClCompile Include="SwapChain.cpp">
       <Filter>Engine</Filter>
     </ClCompile>
-    <ClCompile Include="RootSig.cpp">
+    <ClCompile Include="RootSignature.cpp">
       <Filter>Engine</Filter>
     </ClCompile>
     <ClCompile Include="Mesh.cpp">
@@ -58,9 +58,9 @@
       <Filter>Engine</Filter>
     </ClCompile>
     <ClCompile Include="Texture.cpp">
-      <Filter>Engine</Filter>
+      <Filter>Resource</Filter>
     </ClCompile>
-    <ClCompile Include="Depth_Stencil_Buffer.cpp">
+    <ClCompile Include="DepthStencilBuffer.cpp">
       <Filter>Engine</Filter>
     </ClCompile>
     <ClCompile Include="Material.cpp">
@@ -75,10 +75,10 @@
     <ClCompile Include="MeshRenderer.cpp">
       <Filter>GameObject</Filter>
     </ClCompile>
-    <ClCompile Include="Transform.cpp">
+    <ClCompile Include="MonoBehaviour.cpp">
       <Filter>GameObject</Filter>
     </ClCompile>
-    <ClCompile Include="MonoBehaviour.cpp">
+    <ClCompile Include="Transform.cpp">
       <Filter>GameObject</Filter>
     </ClCompile>
     <ClCompile Include="SceneManager.cpp">
@@ -99,15 +99,15 @@
     <ClCompile Include="Camera.cpp">
       <Filter>GameObject</Filter>
     </ClCompile>
-    <ClCompile Include="TestCamera.cpp">
-      <Filter>GameObject\TestCamera</Filter>
+    <ClCompile Include="TestCameraScript.cpp">
+      <Filter>GameObject\Test</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h">
       <Filter>Utils</Filter>
     </ClInclude>
-    <ClInclude Include="Enginepch.h">
+    <ClInclude Include="EnginePch.h">
       <Filter>Utils</Filter>
     </ClInclude>
     <ClInclude Include="d3dx12.h">
@@ -116,7 +116,7 @@
     <ClInclude Include="Engine.h">
       <Filter>Engine</Filter>
     </ClInclude>
-    <ClInclude Include="Command_Queue.h">
+    <ClInclude Include="CommandQueue.h">
       <Filter>Engine</Filter>
     </ClInclude>
     <ClInclude Include="Device.h">
@@ -125,7 +125,7 @@
     <ClInclude Include="SwapChain.h">
       <Filter>Engine</Filter>
     </ClInclude>
-    <ClInclude Include="RootSig.h">
+    <ClInclude Include="RootSignature.h">
       <Filter>Engine</Filter>
     </ClInclude>
     <ClInclude Include="Mesh.h">
@@ -141,9 +141,9 @@
       <Filter>Engine</Filter>
     </ClInclude>
     <ClInclude Include="Texture.h">
-      <Filter>Engine</Filter>
+      <Filter>Resource</Filter>
     </ClInclude>
-    <ClInclude Include="Depth_Stencil_Buffer.h">
+    <ClInclude Include="DepthStencilBuffer.h">
       <Filter>Engine</Filter>
     </ClInclude>
     <ClInclude Include="Material.h">
@@ -158,10 +158,10 @@
     <ClInclude Include="MeshRenderer.h">
       <Filter>GameObject</Filter>
     </ClInclude>
-    <ClInclude Include="Transform.h">
+    <ClInclude Include="MonoBehaviour.h">
       <Filter>GameObject</Filter>
     </ClInclude>
-    <ClInclude Include="MonoBehaviour.h">
+    <ClInclude Include="Transform.h">
       <Filter>GameObject</Filter>
     </ClInclude>
     <ClInclude Include="SceneManager.h">
@@ -182,8 +182,8 @@
     <ClInclude Include="Camera.h">
       <Filter>GameObject</Filter>
     </ClInclude>
-    <ClInclude Include="TestCamera.h">
-      <Filter>GameObject\TestCamera</Filter>
+    <ClInclude Include="TestCameraScript.h">
+      <Filter>GameObject\Test</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

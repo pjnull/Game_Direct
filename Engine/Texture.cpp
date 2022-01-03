@@ -52,14 +52,14 @@ void Texture::CreateTexture(const wstring& path)
 	if (FAILED(hr))
 		assert(nullptr);
 
-	::UpdateSubresources(RESOUCE_Cmd_List.Get(),
+	::UpdateSubresources(RESOURCE_CMD_LIST.Get(),
 		_tex2D.Get(),
 		textureUploadHeap.Get(),
 		0, 0,
 		static_cast<unsigned int>(subResources.size()),
 		subResources.data());
 
-	GEngine->GetcmdQ()->FlushResourceCommandQueue();
+	GEngine->GetCmdQueue()->FlushResourceCommandQueue();
 }
 
 void Texture::CreateView()

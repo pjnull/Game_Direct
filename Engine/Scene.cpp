@@ -4,7 +4,7 @@
 
 void Scene::Awake()
 {
-	for (const shared_ptr<GameObject>& gameObject : _gameobject)
+	for (const shared_ptr<GameObject>& gameObject : _gameObjects)
 	{
 		gameObject->Awake();
 	}
@@ -12,7 +12,7 @@ void Scene::Awake()
 
 void Scene::Start()
 {
-	for (const shared_ptr<GameObject>& gameObject : _gameobject)
+	for (const shared_ptr<GameObject>& gameObject : _gameObjects)
 	{
 		gameObject->Start();
 	}
@@ -20,7 +20,7 @@ void Scene::Start()
 
 void Scene::Update()
 {
-	for (const shared_ptr<GameObject>& gameObject : _gameobject)
+	for (const shared_ptr<GameObject>& gameObject : _gameObjects)
 	{
 		gameObject->Update();
 	}
@@ -28,7 +28,7 @@ void Scene::Update()
 
 void Scene::LateUpdate()
 {
-	for (const shared_ptr<GameObject>& gameObject : _gameobject)
+	for (const shared_ptr<GameObject>& gameObject : _gameObjects)
 	{
 		gameObject->LateUpdate();
 	}
@@ -36,22 +36,22 @@ void Scene::LateUpdate()
 
 void Scene::FinalUpdate()
 {
-	for (const shared_ptr<GameObject>& gameObject : _gameobject)
+	for (const shared_ptr<GameObject>& gameObject : _gameObjects)
 	{
 		gameObject->FinalUpdate();
 	}
 }
 
-void Scene::AddGameObject(shared_ptr<GameObject> gameobject)
+void Scene::AddGameObject(shared_ptr<GameObject> gameObject)
 {
-	_gameobject.push_back(gameobject);
+	_gameObjects.push_back(gameObject);
 }
 
-void Scene::RemoveGameObject(shared_ptr<GameObject> gameobject)
+void Scene::RemoveGameObject(shared_ptr<GameObject> gameObject)
 {
-	auto findit = std::find(_gameobject.begin(), _gameobject.end(), gameobject);
-	if (findit != _gameobject.end())
+	auto findIt = std::find(_gameObjects.begin(), _gameObjects.end(), gameObject);
+	if (findIt != _gameObjects.end())
 	{
-		_gameobject.erase(findit);
+		_gameObjects.erase(findIt);
 	}
 }

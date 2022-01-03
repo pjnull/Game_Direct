@@ -1,14 +1,11 @@
 #pragma once
-#include "Enginepch.h"
-
-class GameObject;
-class Transform;
 
 enum class COMPONENT_TYPE : uint8
 {
 	TRANSFORM,
 	MESH_RENDERER,
 	CAMERA,
+	// ...
 	MONO_BEHAVIOUR,
 	END,
 };
@@ -17,19 +14,22 @@ enum
 {
 	FIXED_COMPONENT_COUNT = static_cast<uint8>(COMPONENT_TYPE::END) - 1
 };
+
+class GameObject;
+class Transform;
+
 class Component
 {
 public:
-
 	Component(COMPONENT_TYPE type);
 	virtual ~Component();
 
 public:
-	virtual void	Awake() {}//제일 처음 호출
-	virtual void	Start() {}//2
-	virtual void	Update() {}//3
-	virtual void	LateUpdate() {}//4
-	virtual void	FinalUpdate() {}//제일 마지막에 호출
+	virtual void Awake() { }
+	virtual void Start() { }
+	virtual void Update() { }
+	virtual void LateUpdate() { }
+	virtual void FinalUpdate() { }
 
 public:
 	COMPONENT_TYPE GetType() { return _type; }
@@ -43,7 +43,7 @@ private:
 	void SetGameObject(shared_ptr<GameObject> gameObject) { _gameObject = gameObject; }
 
 protected:
-	COMPONENT_TYPE	_type;
+	COMPONENT_TYPE _type;
 	weak_ptr<GameObject> _gameObject;
 };
 

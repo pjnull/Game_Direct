@@ -11,25 +11,13 @@ void Mesh::Init(const vector<Vertex>& vertexBuffer, const vector<uint32>& indexB
 
 void Mesh::Render()
 {
-	CmdList->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
-	CmdList->IASetVertexBuffers(0, 1, &_vertexBufferView); // Slot: (0~15)
-	CmdList->IASetIndexBuffer(&_indexBufferView);
+	CMD_LIST->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
+	CMD_LIST->IASetVertexBuffers(0, 1, &_vertexBufferView); // Slot: (0~15)
+	CMD_LIST->IASetIndexBuffer(&_indexBufferView);
 
-	
-	
-		//GEngine->GetTableDecHeap()->SetCBV(handle, CBV_REGISTER::b0);
-	
-	/*{
-		D3D12_CPU_DESCRIPTOR_HANDLE handle = GEngine->GetConstantBuffer()->PushData(0, &_transform, sizeof(_transform));
-		GEngine->GetTableDecHeap()->SetCBV(handle, CBV_REGISTER::b1);
-	}*/
+	GEngine->GetTableDescHeap()->CommitTable();
 
-	GEngine->GetTableDecHeap()->CommitTable();
-	//GEngine->GetConstantBuffer()->PushData(1, &_transform, sizeof(_transform));
-	//CmdList->SetGraphicsRootConstantBufferView();
-
-	//CmdList->DrawInstanced(_vertexCount, 1, 0, 0);
-	CmdList->DrawIndexedInstanced(_indexCount, 1, 0, 0, 0);
+	CMD_LIST->DrawIndexedInstanced(_indexCount, 1, 0, 0, 0);
 }
 
 void Mesh::CreateVertexBuffer(const vector<Vertex>& buffer)
@@ -57,14 +45,14 @@ void Mesh::CreateVertexBuffer(const vector<Vertex>& buffer)
 
 	// Initialize the vertex buffer view.
 	_vertexBufferView.BufferLocation = _vertexBuffer->GetGPUVirtualAddress();
-	_vertexBufferView.StrideInBytes = sizeof(Vertex);
-	_vertexBufferView.SizeInBytes = bufferSize;
+	_vertexBufferView.StrideInBytes = sizeof(Vertex); // 정점 1개 크기
+	_vertexBufferView.SizeInBytes = bufferSize; // 버퍼의 크기	
 }
 
 void Mesh::CreateIndexBuffer(const vector<uint32>& buffer)
 {
 	_indexCount = static_cast<uint32>(buffer.size());
-	uint32 bufferSize = _indexCount * sizeof(Vertex);
+	uint32 bufferSize = _indexCount * sizeof(uint32);
 
 	D3D12_HEAP_PROPERTIES heapProperty = CD3DX12_HEAP_PROPERTIES(D3D12_HEAP_TYPE_UPLOAD);
 	D3D12_RESOURCE_DESC desc = CD3DX12_RESOURCE_DESC::Buffer(bufferSize);
@@ -83,7 +71,6 @@ void Mesh::CreateIndexBuffer(const vector<uint32>& buffer)
 	::memcpy(indexDataBuffer, &buffer[0], bufferSize);
 	_indexBuffer->Unmap(0, nullptr);
 
-	// Initialize the vertex buffer view.
 	_indexBufferView.BufferLocation = _indexBuffer->GetGPUVirtualAddress();
 	_indexBufferView.Format = DXGI_FORMAT_R32_UINT;
 	_indexBufferView.SizeInBytes = bufferSize;

@@ -6,8 +6,6 @@
 #include "Input.h"
 #include "Timer.h"
 
-
-
 TestCamera::TestCamera()
 {
 }

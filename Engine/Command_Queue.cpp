@@ -71,8 +71,8 @@ void Command_Queue::RenderBegin(const D3D12_VIEWPORT* vp, const D3D12_RECT* rect
 	GEngine->GetConstantBuffer(CONSTANT_BUFFER_TYPE::TRANSFORM)->Clear();
 	GEngine->GetConstantBuffer(CONSTANT_BUFFER_TYPE::MATERIAL)->Clear();
 	
-	GEngine->GetTableDecHeap()->Clear();
-	ID3D12DescriptorHeap* descHeap = GEngine->GetTableDecHeap()->GetDescriptorHeap().Get();
+	GEngine->GetTableDescHeap()->Clear();
+	ID3D12DescriptorHeap* descHeap = GEngine->GetTableDescHeap()->GetDescriptorHeap().Get();
 	_cmdList->SetDescriptorHeaps(1, &descHeap);
 
 	_cmdList->ResourceBarrier(1, &barrier);

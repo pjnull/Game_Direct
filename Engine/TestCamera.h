@@ -11,7 +11,6 @@ public:
 
 private:
 	float _speed = 100.f;
-	Vec2 _prev;
 
 };
 

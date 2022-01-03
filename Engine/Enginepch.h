@@ -1,28 +1,31 @@
 #pragma once
 
+// std::byte 사용하지 않음
 #define _HAS_STD_BYTE 0
 
-#include<Windows.h>
-#include<tchar.h>
-#include<memory>
-#include<string>
-#include<vector>
-#include<array>
-#include<list>
-#include<map>
+// 각종 include
+#include <windows.h>
+#include <tchar.h>
+#include <memory>
+#include <string>
+#include <vector>
+#include <array>
+#include <list>
+#include <map>
 using namespace std;
 
-#include<filesystem>
+#include <filesystem>
 namespace fs = std::filesystem;
-#include"d3dx12.h"
-#include<d3d12.h>
-#include<wrl.h>
-#include<d3dcompiler.h>
-#include<dxgi.h>
-#include<DirectXMath.h>
-#include<DirectXPackedVector.h>
-#include<DirectXColors.h>
-#include"SimpleMath.h"
+
+#include "d3dx12.h"
+#include "SimpleMath.h"
+#include <d3d12.h>
+#include <wrl.h>
+#include <d3dcompiler.h>
+#include <dxgi.h>
+#include <DirectXMath.h>
+#include <DirectXPackedVector.h>
+#include <DirectXColors.h>
 using namespace DirectX;
 using namespace DirectX::PackedVector;
 using namespace Microsoft::WRL;
@@ -30,17 +33,19 @@ using namespace Microsoft::WRL;
 #include <DirectXTex/DirectXTex.h>
 #include <DirectXTex/DirectXTex.inl>
 
-#pragma comment(lib,"d3d12")
-#pragma comment(lib,"dxgi")
-#pragma comment(lib,"dxguid")
-#pragma comment(lib,"d3dcompiler")
+// 각종 lib
+#pragma comment(lib, "d3d12")
+#pragma comment(lib, "dxgi")
+#pragma comment(lib, "dxguid")
+#pragma comment(lib, "d3dcompiler")
 
 #ifdef _DEBUG
-#pragma comment(lib,"DirectXTex\\DirectXTex_Debug.lib")
+#pragma comment(lib, "DirectXTex\\DirectXTex_debug.lib")
 #else
-#pragma comment(lib,"DirectXTex\\DirectXTex_Release.lib")
+#pragma comment(lib, "DirectXTex\\DirectXTex.lib")
 #endif
 
+// 각종 typedef
 using int8		= __int8;
 using int16		= __int16;
 using int32		= __int32;
@@ -54,7 +59,6 @@ using Vec3		= DirectX::SimpleMath::Vector3;
 using Vec4		= DirectX::SimpleMath::Vector4;
 using Matrix	= DirectX::SimpleMath::Matrix;
 
-
 enum class CBV_REGISTER : uint8
 {
 	b0,
@@ -66,9 +70,9 @@ enum class CBV_REGISTER : uint8
 	END
 };
 
-enum class SRV_REGISTER: uint8
+enum class SRV_REGISTER : uint8
 {
-	t0=static_cast<uint8>(CBV_REGISTER::END),
+	t0 = static_cast<uint8>(CBV_REGISTER::END),
 	t1,
 	t2,
 	t3,
@@ -77,54 +81,55 @@ enum class SRV_REGISTER: uint8
 	END
 };
 
-struct  WindowInfo
-{
-	HWND hwnd;//출력 윈도우
-	int32 width;
-	int32 height;
-	bool windowed;//창모드or전체화면
-};
 enum
 {
 	SWAP_CHAIN_BUFFER_COUNT = 2,
 	CBV_REGISTER_COUNT = CBV_REGISTER::END,
-	SRV_REGISTER_COUNT = static_cast<uint8>(SRV_REGISTER::END)-(CBV_REGISTER_COUNT),
-	REGISTER_COUNT = CBV_REGISTER_COUNT+ SRV_REGISTER_COUNT,
+	SRV_REGISTER_COUNT = static_cast<uint8>(SRV_REGISTER::END) - CBV_REGISTER_COUNT,
+	REGISTER_COUNT = CBV_REGISTER_COUNT + SRV_REGISTER_COUNT,
+};
+
+struct WindowInfo
+{
+	HWND	hwnd; // 출력 윈도우
+	int32	width; // 너비
+	int32	height; // 높이
+	bool	windowed; // 창모드 or 전체화면
 };
 
 struct Vertex
 {
-	Vec3 pos;//X,Y,Z좌표
-	Vec4 color;//RGBA
+	Vec3 pos;
+	Vec4 color;
 	Vec2 uv;
-
 };
+
+#define DECLARE_SINGLE(type)		\
+private:							\
+	type() {}						\
+	~type() {}						\
+public:								\
+	static type* GetInstance()		\
+	{								\
+		static type instance;		\
+		return &instance;			\
+	}								\
+
+#define GET_SINGLE(type)	type::GetInstance()
+
+#define DEVICE				GEngine->GetDevice()->GetDevice()
+#define CMD_LIST			GEngine->GetCmdQueue()->GetCmdList()
+#define RESOURCE_CMD_LIST	GEngine->GetCmdQueue()->GetResourceCmdList()
+#define ROOT_SIGNATURE		GEngine->GetRootSignature()->GetSignature()
+
+#define INPUT				GET_SINGLE(Input)
+#define DELTA_TIME			GET_SINGLE(Timer)->GetDeltaTime()
+
+#define CONST_BUFFER(type)	GEngine->GetConstantBuffer(type)
+
 struct TransformParams
 {
 	Matrix matWVP;
 };
 
-#define DECLARE_SINGLE(type)			\
-private:								\
-	type() {}							\
-	~type() {}							\
-public:									\
-	static type* GetInstance()			\
-	{									\
-		static type instance;			\
-		return &instance;				\
-	}									\
-
-#define GET_SINGLE(type) type::GetInstance()
-
-#define DEVICE GEngine->GetDevice()->GetDevice()
-#define CmdList GEngine->GetcmdQ()->GetCmdlist()
-#define RESOUCE_Cmd_List GEngine->GetcmdQ()->GetResCmdlist()
-#define ROOT_SIGNATURE GEngine->GetRootSig()->GetSignature()
-#define INPUT GET_SINGLE(Input)
-#define DELTA_TIME	GET_SINGLE(Timer)->GetDeltaTime()
-#define CONST_BUFFER(type) GEngine->GetConstantBuffer(type)
-
 extern unique_ptr<class Engine> GEngine;
-
-

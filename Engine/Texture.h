@@ -1,6 +1,7 @@
 #pragma once
-class Texture
 
+
+class Texture
 {
 public:
 	void Init(const wstring& path);
